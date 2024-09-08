@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Station" ADD COLUMN     "dailyBalance" DOUBLE PRECISION NOT NULL DEFAULT 0.0;

@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  api:
+    env_file:
+      - .env
+    container_name: "starkpay_api_${NODE_ENV}"
+    image: "stark-pay-api-${NODE_ENV}"
+    build:
+      context: ./
+      target: "${NODE_ENV}"
+      dockerfile: Dockerfile
+    entrypoint: [  "npm", "run", "migrate:deploy", "&&", "npm", "run", "seed:prod", "npm", "run", "start:${NODE_ENV}"]
+    ports:
+      -  8081:8081
+    networks:
+      - starkpay-network
+    volumes:
+      - ./app:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    env_file:
+      - .env
+    environment:
+      - NGINX_PORT=${NGINX_PORT}
+      - BACKEND_PORT=${BACKEND_PORT}
+      - DROPLET_IP=${DROPLET_IP}
+    ports:
+      - 80:${NGINX_PORT}
+    depends_on:
+      - api
+    networks:
+      - starkpay-network
+
+networks:
+  starkpay-network:

@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  bus-stop-api-gateway-db:
+    image: postgres:14
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: localpass
+      POSTGRES_DB: bus-stop-api-gateway-local
+
+    networks:
+      - bus-stop-api-gateway-local
+
+networks:
+  bus-stop-api-gateway-local:

@@ -1,0 +1,282 @@
+[
+  {
+    "slug": "access-bank",
+    "name": "Access Bank",
+    "code": "044",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/access-bank.png",
+    "ussd": "*901#"
+  },
+  {
+    "slug": "access-bank-diamond",
+    "name": "Access Bank (Diamond)",
+    "code": "063",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/access-bank-diamond.png",
+    "ussd": "*426#"
+  },
+  {
+    "slug": "alat-by-wema",
+    "name": "ALAT by WEMA",
+    "code": "035A",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/alat-by-wema.png",
+    "ussd": "*945*100#"
+  },
+  {
+    "slug": "asosavings",
+    "name": "ASO Savings and Loans",
+    "code": "401",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/asosavings.png",
+    "ussd": ""
+  },
+  {
+    "slug": "bowen-microfinance-bank",
+    "name": "Bowen Microfinance Bank",
+    "code": "50931",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/bowen-microfinance-bank.png",
+    "ussd": ""
+  },
+  {
+    "slug": "cemcs-microfinance-bank",
+    "name": "CEMCS Microfinance Bank",
+    "code": "50823",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/cemcs-microfinance-bank.png",
+    "ussd": ""
+  },
+  {
+    "slug": "citibank-nigeria",
+    "name": "Citibank Nigeria",
+    "code": "023",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/citibank-nigeria.png",
+    "ussd": ""
+  },
+  {
+    "slug": "ecobank-nigeria",
+    "name": "Ecobank Nigeria",
+    "code": "050",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/ecobank-nigeria.png",
+    "ussd": "*326#"
+  },
+  {
+    "slug": "ekondo-microfinance-bank",
+    "name": "Ekondo Microfinance Bank",
+    "code": "562",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/ekondo-microfinance-bank.png",
+    "ussd": "*540*178#"
+  },
+  {
+    "slug": "fidelity-bank",
+    "name": "Fidelity Bank",
+    "code": "070",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/fidelity-bank.png",
+    "ussd": "*770#"
+  },
+  {
+    "slug": "first-bank-of-nigeria",
+    "name": "First Bank of Nigeria",
+    "code": "011",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/first-bank-of-nigeria.png",
+    "ussd": "*894#"
+  },
+  {
+    "slug": "first-city-monument-bank",
+    "name": "First City Monument Bank",
+    "code": "214",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/first-city-monument-bank.png",
+    "ussd": "*329#"
+  },
+  {
+    "slug": "globus-bank",
+    "name": "Globus Bank",
+    "code": "00103",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/globus-bank.png",
+    "ussd": "*989#"
+  },
+  {
+    "slug": "guaranty-trust-bank",
+    "name": "Guaranty Trust Bank",
+    "code": "058",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/guaranty-trust-bank.png",
+    "ussd": "*737#"
+  },
+  {
+    "slug": "hasal-microfinance-bank",
+    "name": "Hasal Microfinance Bank",
+    "code": "50383",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/hasal-microfinance-bank.png",
+    "ussd": "*322*127#"
+  },
+  {
+    "slug": "heritage-bank",
+    "name": "Heritage Bank",
+    "code": "030",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/heritage-bank.png",
+    "ussd": "*322#"
+  },
+  {
+    "slug": "jaiz-bank",
+    "name": "Jaiz Bank",
+    "code": "301",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/jaiz-bank.png",
+    "ussd": "*389*301#"
+  },
+  {
+    "slug": "keystone-bank",
+    "name": "Keystone Bank",
+    "code": "082",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/keystone-bank.png",
+    "ussd": "*7111#"
+  },
+  {
+    "slug": "kuda-bank",
+    "name": "Kuda Bank",
+    "code": "50211",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/kuda-bank.png",
+    "ussd": ""
+  },
+  {
+    "slug": "one-finance",
+    "name": "One Finance",
+    "code": "565",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/one-finance.png",
+    "ussd": "*1303#"
+  },
+  {
+    "slug": "paga",
+    "name": "Paga",
+    "code": "327",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/paga.png",
+    "ussd": ""
+  },
+  {
+    "slug": "parallex-bank",
+    "name": "Parallex Bank",
+    "code": "526",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/parallex-bank.png",
+    "ussd": "*322*318*0#"
+  },
+  {
+    "slug": "paycom",
+    "name": "PayCom",
+    "code": "100004",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/paycom.png",
+    "ussd": "*955#"
+  },
+  {
+    "slug": "polaris-bank",
+    "name": "Polaris Bank",
+    "code": "076",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/polaris-bank.png",
+    "ussd": "*833#"
+  },
+  {
+    "slug": "providus-bank",
+    "name": "Providus Bank",
+    "code": "101",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/providus-bank.png",
+    "ussd": ""
+  },
+  {
+    "slug": "rubies-mfb",
+    "name": "Rubies MFB",
+    "code": "125",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/rubies-mfb.png",
+    "ussd": "*7797#"
+  },
+  {
+    "slug": "sparkle-microfinance-bank",
+    "name": "Sparkle Microfinance Bank",
+    "code": "51310",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/sparkle-microfinance-bank.png",
+    "ussd": ""
+  },
+  {
+    "slug": "stanbic-ibtc-bank",
+    "name": "Stanbic IBTC Bank",
+    "code": "221",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/stanbic-ibtc-bank.png",
+    "ussd": "*909#"
+  },
+  {
+    "slug": "standard-chartered-bank",
+    "name": "Standard Chartered Bank",
+    "code": "068",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/standard-chartered-bank.png",
+    "ussd": ""
+  },
+  {
+    "slug": "sterling-bank",
+    "name": "Sterling Bank",
+    "code": "232",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/sterling-bank.png",
+    "ussd": "*822#"
+  },
+  {
+    "slug": "suntrust-bank",
+    "name": "Suntrust Bank",
+    "code": "100",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/suntrust-bank.png",
+    "ussd": "*5230#"
+  },
+  {
+    "slug": "taj-bank",
+    "name": "TAJ Bank",
+    "code": "302",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/taj-bank.png",
+    "ussd": "*898#"
+  },
+  {
+    "slug": "tcf-mfb",
+    "name": "TCF MFB",
+    "code": "51211",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/tcf-mfb.png",
+    "ussd": "*908#"
+  },
+  {
+    "slug": "titan-trust-bank",
+    "name": "Titan Trust Bank",
+    "code": "102",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/titan-trust-bank.png",
+    "ussd": "*922#"
+  },
+  {
+    "slug": "union-bank-of-nigeria",
+    "name": "Union Bank of Nigeria",
+    "code": "032",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/union-bank-of-nigeria.png",
+    "ussd": "*826#"
+  },
+  {
+    "slug": "united-bank-for-africa",
+    "name": "United Bank For Africa",
+    "code": "033",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/united-bank-for-africa.png",
+    "ussd": "*919#"
+  },
+  {
+    "slug": "unity-bank",
+    "name": "Unity Bank",
+    "code": "215",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/unity-bank.png",
+    "ussd": "*7799#"
+  },
+  {
+    "slug": "vfd",
+    "name": "VFD",
+    "code": "566",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/vfd.png",
+    "ussd": ""
+  },
+  {
+    "slug": "wema-bank",
+    "name": "Wema Bank",
+    "code": "035",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/wema-bank.png",
+    "ussd": "*945#"
+  },
+  {
+    "slug": "zenith-bank",
+    "name": "Zenith Bank",
+    "code": "057",
+    "logo": "https://stark-pay-assets.fra1.digitaloceanspaces.com/nigerian-banks-logos/zenith-bank.png",
+    "ussd": "*966#"
+  }
+]

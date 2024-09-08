@@ -1,0 +1,433 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lastLogin DateTime @default(now())
+
+  numberOfSequentialLoginAttempts Int @default(0)
+  lastLoginAttempt DateTime @default(now())
+
+  firstName String?
+  lastName  String?
+  username  String? @unique
+
+  phoneNumber String  @unique
+  email       String? @unique
+
+  hash            String ?
+  passwordHash String ?
+  refreshToken String @default("")
+  biometricSecret String? @unique
+  roles           Role[]
+
+  otp                String? @unique
+  identityIsVerified Boolean @default(false)
+
+  twoFactorEnabled     Boolean           @default(false)
+  twoFactorAuthType    TwoFactoAuthType?
+  twoFactorSecret      String?           @unique
+  biometricAuthEnabled Boolean           @default(false)
+  emailVerified        Boolean           @default(false)
+  phoneNumberVerified  Boolean           @default(false)
+
+  country   Country @relation(fields: [countryId], references: [id], onDelete: Restrict)
+  countryId Int     @default(1)
+
+  roleInBusiness RoleInBusinessEnum?
+  business   Business? @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  businessId String?     
+
+  bankAccountId String?
+
+  active      Boolean      @default(true)
+  bankAccount BankAccount?
+
+  notificationTokens NotificationToken[]
+  reportCreatedByMe  Report[] @relation(name: "createdBy")
+  myReports  Report[] @relation(name: "user")
+
+  wallets            Wallet[]
+  userCards          Card[]
+  createdBycards     Card[]              @relation(name: "createdBy")
+  fromChat           chat[]              @relation(name: "from")
+  toChat             chat[]              @relation(name: "to")
+  transactions       Transaction[]       @relation(name: "createdBy")
+  transaction        Transaction[]       @relation(name: "recipient")
+  cardHistories      CardHistory[]
+  userHistoriesCreatedBy    UserHistory[] @relation(name: "createdBy")
+  userHistories      UserHistory[] @relation(name: "user")
+
+  @@index(fields: [firstName, lastName, phoneNumber, email, otp])
+}
+
+model Station {
+  id        String   @id @default(uuid())
+
+  name String @unique
+  active Boolean @default(true)
+  lastLogin DateTime @default(now())
+
+  dailyBalance Float @default(0.0)
+
+  refreshToken String @default("")
+
+  roles           Role[] @default([MERCHANT])
+
+  amountIsFixed Boolean @default(false)
+  amount Float @default(0.0) 
+
+  pinHash            String
+
+  businessId String
+  business     Business              @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  type StationType
+
+  transactions Transaction[]
+}
+
+model Business {
+  id        String   @id @default(uuid())
+
+  name String
+  email String @unique
+  phoneNumber String @unique
+  serviceFeePercentage Float @default(5.0)
+
+  emailVerified        Boolean           @default(false)
+  phoneNumberVerified  Boolean           @default(false)
+
+  active      Boolean      @default(true)
+  bankAccount BankAccount?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  wallets            Wallet[]
+  users User[]
+  stations Station[]
+  transactions Transaction[]
+}
+
+model UserHistory {
+  id        String   @id @default(uuid())
+
+  createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Cascade, name: "createdBy")
+  createdById String
+
+  createdAt DateTime @default(now())
+
+
+  userId String
+  user  User    @relation(fields: [userId], references: [id], onDelete: Cascade, name: "user")
+
+  action UserAction
+}
+
+model Bank {
+  slug         String        @id
+  name         String        @unique
+  code         String        @unique
+  logo         String        @unique
+  ussd         String?
+  BankAccounts BankAccount[]
+}
+
+model BankAccount {
+  id String @id @default(uuid())
+
+  bankSlug String
+  bank     Bank   @relation(fields: [bankSlug], references: [slug], onDelete: Cascade)
+
+  number      String
+  accountName String @default("John Doe")
+
+  businessId String? @unique
+  business     Business?              @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String? @unique
+
+  @@map("bank accounts")
+}
+
+model Country {
+  id Int @id @default(autoincrement())
+
+  name  String @unique
+  code  String
+  ext   String
+  regex String
+
+  users User[]
+
+  @@map("countries")
+}
+
+model Wallet {
+  id          String   @id @default(uuid())
+  balance     Float    @default(0.0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId String?
+  businessId String? @unique
+
+  tempAccountId String?
+
+  user         User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  business     Business?              @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  cards        Card[]
+  transactions Transaction[]
+
+  latestTransactionTimestamp DateTime?
+  totalTransactionAmountToday Int @default(0)
+
+  @@map("wallets")
+}
+
+model Card {
+  id            Int      @id @default(autoincrement())
+  nfcCardNumber String   @unique
+  hash          String   @unique
+  name          String?
+  active        Boolean  @default(false) // should be false by default, when created then active when being added to wallet
+  walletId      String?
+  balance       Float?
+  createdAt     DateTime @default(now())
+
+  wallet       Wallet?       @relation(fields: [walletId], references: [id])
+  transactions Transaction[]
+
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String?
+
+  createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Cascade, name: "createdBy")
+  createdById String
+
+  cardHistories      CardHistory[]
+
+  @@index(fields: [nfcCardNumber(sort: Desc), hash])
+  @@map("cards")
+}
+
+model CardHistory {
+  id            Int      @id @default(autoincrement())
+
+  createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdById String
+
+  createdAt DateTime @default(now())
+
+
+  cardId Int
+  card   Card   @relation(fields: [cardId], references: [id], onDelete: Cascade)
+
+  action CardAction
+}
+
+model Transaction {
+  id                   String            @id @default(uuid())
+  transactionReference String            @unique
+  status               TransactionStatus
+  walletId             String?
+  cardId               Int?
+  type                 TransactionType
+  amount               Float
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+  recipientId          String?
+  createdById          String?
+
+  narration String?
+  processorStatus String @default("failed")
+  processorTrxId String?
+  processor PaymentProcessor @default(FLUTTERWAVE)
+
+  fee Float @default(0)
+
+  businessId String?
+  business     Business?              @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  stationId String?
+  station     Station?              @relation(fields: [stationId], references: [id], onDelete: Cascade)
+
+  wallet Wallet? @relation(fields: [walletId], references: [id])
+
+  createdBy User? @relation(fields: [createdById], references: [id], name: "createdBy")
+
+  recipient User? @relation(fields: [recipientId], references: [id], name: "recipient")
+
+  card Card? @relation(fields: [cardId], references: [id])
+
+  userId String?
+
+  @@map("transactions")
+}
+
+model NotificationToken {
+  id String @id @default(uuid())
+
+  user   User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  deviceType String?
+
+  notificationToken String @unique
+
+  @@map("notification_tokens")
+}
+
+model chat {
+  id String @id @default(uuid())
+
+  from   User   @relation(fields: [fromId], references: [id], name: "from")
+  fromId String
+
+  to   User   @relation(fields: [toId], references: [id], name: "to")
+  toId String
+}
+
+model Notification {
+  id            String   @id @default(uuid())
+  createdAt     DateTime @default(now())
+  userId        String
+  seen          Boolean  @default(false)
+  message       String
+  type          String
+  actionable    Boolean
+  transactionId String?
+}
+
+model Configuration {
+  id                 Int   @id @default(autoincrement())
+  creditsPerReferral Float @default(0.0)
+  paymentProcessor PaymentProcessor @default(FLUTTERWAVE)
+  collectionDurationInSeconds  Int @default(60)
+
+  @@map("configurations")
+}
+
+model Report {
+  id String @id @default(uuid())
+  createdAt     DateTime @default(now())
+
+  subject String
+  category ReportCategory
+  content String
+
+  createdBy User? @relation(fields: [createdById], references: [id], name: "createdBy")
+  createdById String
+
+  user User? @relation(fields: [userId], references: [id], name: "user")
+  userId String
+}
+
+model waiters {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  fullName String
+  email String
+}
+
+model Webhooks {
+  id        String   @id @default(uuid())
+  
+  data Json
+  source WebhookSource
+}
+
+model ScheduleBusiness {
+  id        String   @id @default(uuid())
+  
+  name String
+  email String
+}
+
+
+enum TransactionStatus {
+  SUCCESSFUL
+  FAILED
+  PENDING
+}
+
+enum TransactionType {
+  FUND_WALLET
+  FUND_CARD
+  WITHDRAWAL
+  PAYMENT
+  TRANSFER
+  REFERRAL_BONUS
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  CUSTOMER
+  MERCHANT
+  SUPPORT
+  AGENT
+  BUSINESS
+}
+
+enum RoleInBusinessEnum {
+  ADMIN
+  VIEWER
+}
+
+enum CardAction {
+  ATTACH
+  DETTACH
+  DISABLE
+  ENABLE
+  DELETE
+}
+
+enum UserAction {
+  CREATE
+  UPDATE
+  SUSPEND
+  DELETE
+}
+
+enum ReportCategory {
+  FUNDING
+  PAYMENT
+  CREATING_ACCOUNT
+  LOGGING_IN
+  CARD
+  EDIT_PROFILE
+}
+
+enum TwoFactoAuthType {
+  EMAIL_OTP
+  AUTH_APP
+}
+
+enum StationType {
+  VEHICLE
+}
+
+enum WebhookSource {
+  PAYSTACK
+  FLUTTERWAVE
+}
+
+enum PaymentProcessor {
+  FLUTTERWAVE
+  PAYSTACK
+}
